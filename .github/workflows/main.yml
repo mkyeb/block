@@ -1,0 +1,27 @@
+name: update
+
+on:
+  schedule:
+    - cron: '0 19 * * *'
+  workflow_dispatch:
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - run: |
+        cd blocked-names
+        python generate-domains-blocklist.py > ../blocked-names.txt
+        cd ../
+        chmod +x ./dnscrypt-proxy-config.sh
+        ./dnscrypt-proxy-config.sh
+        git config user.name "mkyeb"
+        git config user.email "144444458+mkyeb@users.noreply.github.com"
+        git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git add .
+        git commit -m "$(date "+%Y%m%d-%H%M")"
+        git push
