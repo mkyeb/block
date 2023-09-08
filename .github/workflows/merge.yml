@@ -1,4 +1,4 @@
-name: update
+name: merge
 
 on:
   schedule:
@@ -19,9 +19,9 @@ jobs:
         cd ../
         chmod +x ./dnscrypt-proxy-config.sh
         ./dnscrypt-proxy-config.sh
-        git config user.name "mkyeb"
-        git config user.email "144444458+mkyeb@users.noreply.github.com"
+        git config user.name "jekya"
+        git config user.email "144327373+jekya@users.noreply.github.com"
         git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git add .
-        git commit -m "$(date "+%Y%m%d-%H%M")" --allow-empty
+        git commit -m "$(date "+%Y%m%d-%H%M")"
         git push
