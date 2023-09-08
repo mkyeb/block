@@ -1,6 +1,11 @@
 name: update
 
 on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - '.github/workflows/main.yml'
   schedule:
     - cron: '0 19 * * *'
   workflow_dispatch:
