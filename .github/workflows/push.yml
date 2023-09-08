@@ -1,8 +1,8 @@
-name: push
+name: test
 
 on:
   workflow_run:
-    workflows: [merge]
+    workflows: [update]
     branches: [master]
     types:
       - completed
